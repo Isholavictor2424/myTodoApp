@@ -13,8 +13,9 @@ import {
 } from 'react-native';
 import { useState, useEffect } from 'react';
 
-// Simple, static Todo screen (no functionality)
-export default function SimpleTodoScreen() {
+
+
+const Todoapp = () => {
   const [freshTodo, setFreshTodo] = useState('');
   type Todo = {
   id: number;
@@ -168,6 +169,8 @@ const [todos, setTodos] = useState<Todo[]>([]);
     </SafeAreaView>
   );
 }
+
+export default Todoapp;
 
 const styles = StyleSheet.create({
   container: {
