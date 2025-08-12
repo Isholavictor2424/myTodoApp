@@ -13,8 +13,6 @@ import {
 } from 'react-native';
 import { useState, useEffect } from 'react';
 
-
-
 const Todoapp = () => {
   const [freshTodo, setFreshTodo] = useState('');
   type Todo = {
@@ -108,23 +106,21 @@ const [todos, setTodos] = useState<Todo[]>([]);
     }))
   }
 
-
-
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
       <View style={{ padding: 10 }}>
-      <View style={styles.header}>
+      <View style={{marginTop: 12,marginBottom: 18,}}>
         <View style = {{flexDirection:"row", justifyContent:"space-between"}}>
-          <Text style={styles.title}>My Todos</Text>
+          <Text style={{ fontSize: 28,fontWeight: '700',color: '#0B1226',}}>My Todos</Text>
           <TouchableOpacity activeOpacity={0.5} onPress={() => setTodos([])}>
             <Text style = {{fontSize:15, fontWeight:'600', alignSelf:"center"}}>Delete all</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.subtitle}>{todos.length} tasks</Text>
+        <Text style={{ marginTop: 4,color: '#8B94A6',fontSize: 14,}}>{todos.length} tasks</Text>
       </View>
 
-      <View style={styles.inputRow}>
+      <View style={{ flexDirection: 'row',alignItems: 'center',marginBottom: 12}}>
         <TextInput
           placeholder="What do you want to do?"
           placeholderTextColor={'black'}
@@ -133,37 +129,37 @@ const [todos, setTodos] = useState<Todo[]>([]);
           onChangeText={value => setFreshTodo(value)}
         />
         <TouchableOpacity style={styles.addButton} activeOpacity={0.7} onPress={() => addTodo()}>
-          <Text style={styles.addButtonText}>Add</Text>
+          <Text style={{color: '#FFFFFF',fontWeight: '600',}}>Add</Text>
         </TouchableOpacity>
       </View>
 
       <FlatList
         data={todos}
         keyExtractor={(item) =>  item.id.toString()}
-        contentContainerStyle={styles.list}
+        contentContainerStyle={{paddingBottom: 20,}}
         renderItem={({ item }) => (
           <View style={styles.todoCard}>
-            <Text style={styles.todoText}>{item.text}</Text>
+            <Text style={{ fontSize: 16,color: '#0B1226',}}>{item.text}</Text>
             <View style = {{flexDirection: 'row'}}>
               {item.isChecked ? (
                 <TouchableOpacity style={[styles.check, {height:36, width:36, backgroundColor: 'lightgreen'}]} activeOpacity={0.5} onPress={() => toggleTodo(item.id)}>
-                  <Text style={[styles.checkText, {fontSize:11}]}>Done!</Text>
+                  <Text style={{color: '#4B7CFE',fontWeight: '700',fontSize:11}}>Done!</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity style={styles.check} activeOpacity={0.5} onPress={() => toggleTodo(item.id)}>
-                  <Text style={styles.checkText}>✓</Text>
+                  <Text style={{color: '#4B7CFE',fontWeight: '700',}}>✓</Text>
                 </TouchableOpacity>
               )}
             <TouchableOpacity style={styles.delete} activeOpacity={0.5} onPress={() => deleteTodo(item.id)}>
-              <Text style={styles.deleteText}>✕</Text>
+              <Text style={{ color: '#4B7CFE',fontWeight: '700',}}>✕</Text>
             </TouchableOpacity>
             </View>
           </View>
         )}
       />
 
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>All tasks up to date</Text>
+      <View style={{paddingVertical: 12, alignItems: 'center',}}>
+        <Text style={{ color: '#A3A9BF',fontSize: 13,}}>All tasks up to date</Text>
         </View>    
       </View>
     </SafeAreaView>
@@ -177,25 +173,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F7F7FB',
     paddingHorizontal: 20,
-  },
-  header: {
-    marginTop: 12,
-    marginBottom: 18,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: '700',
-    color: '#0B1226',
-  },
-  subtitle: {
-    marginTop: 4,
-    color: '#8B94A6',
-    fontSize: 14,
-  },
-  inputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
   },
   input: {
     flex: 1,
@@ -216,13 +193,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  addButtonText: {
-    color: '#FFFFFF',
-    fontWeight: '600',
-  },
-  list: {
-    paddingBottom: 20,
-  },
   todoCard: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -234,10 +204,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#EEF1FB',
   },
-  todoText: {
-    fontSize: 16,
-    color: '#0B1226',
-  },
   check: {
     width: 36,
     height: 36,
@@ -245,18 +211,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#EAF0FF',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  checkText: {
-    color: '#4B7CFE',
-    fontWeight: '700',
-  },
-  footer: {
-    paddingVertical: 12,
-    alignItems: 'center',
-  },
-  footerText: {
-    color: '#A3A9BF',
-    fontSize: 13,
   },
     delete: {
     width: 36,
@@ -266,9 +220,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: 10,
-  },
-  deleteText: {
-    color: '#4B7CFE',
-    fontWeight: '700',
   },
 });
